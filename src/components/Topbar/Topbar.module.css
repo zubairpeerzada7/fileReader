@@ -1,0 +1,8 @@
+.name{
+    font-weight: bold;
+    display: none;
+   @media (min-width: 600px) {
+    display: block;
+  
+}
+}
