@@ -1,4 +1,5 @@
 import React from 'react'
+import  Highlight  from 'react-highlighter';
 import css from './Results.module.css'
 import { Table,TableContainer,TableHead,TableRow,TableCell,TableBody } from '@mui/material'
 export default function Results({data,searchText,page,setPage}) {
@@ -23,7 +24,10 @@ export default function Results({data,searchText,page,setPage}) {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell>{row.sentence}</TableCell>
+                <TableCell>
+                  <Highlight search={searchText} >{row.sentence}</Highlight>
+                  {/* {row.sentence} */}
+                  </TableCell>
               </TableRow>
             ))}
           </TableBody>

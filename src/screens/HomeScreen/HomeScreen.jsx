@@ -15,7 +15,7 @@ export default function HomeScreen() {
     
   },[files])
   React.useEffect(()=>{(async ()=>{
-      if(files&&files.length>0&&searchText&&searchText.length>0){
+      if(files&&files.length>0&&searchText.trim().length>0){
         const [data,error] = await constructData(files,searchText.trim())
         if(error){
           setError("failed to read file")

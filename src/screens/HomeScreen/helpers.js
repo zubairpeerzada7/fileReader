@@ -3,7 +3,6 @@ const parser = require("fast-xml-parser");
 export const constructData = async (files, searchText) => {
   try {
     var data = [];
-    console.log({ files });
     for (let i = 0; i < files.length; i++) {
       if (files[i].name.toLowerCase().includes(".docx")) {
         const file = files[i];
@@ -29,11 +28,26 @@ export const constructData = async (files, searchText) => {
         };
 
         // Intermediate obj
-        var tObj = parser.getTraversalObj(s, options);
-        var jsonObj = parser.convertToJson(tObj, options);
-        console.log({ tObj, jsonObj, s });
+        const tObj = parser.getTraversalObj(s, options);
+        const jsonObj = parser.convertToJson(tObj, options);
+        const sentences = jsonObj?.["w:document"]?.["w:body"]?.["w:p"]
+          ?.map((para) =>
+            Array.isArray(para["w:r"])
+              ? para["w:r"]?.map((item) => {
+                  return item?.["w:t"];
+                })
+              : para["w:r"]?.["w:t"]
+          )
+          .filter((item) => {
+            return searchText && item ? item.includes(searchText) : item;
+          })
+          .map((item) => {
+            return { name: files[i].name, sentence: item };
+          });
+        data = data.concat(sentences);
       }
     }
+    return [data, null];
   } catch (e) {
     console.log(e);
     return [null, { error: e }];

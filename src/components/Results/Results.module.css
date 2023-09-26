@@ -3,4 +3,5 @@
     margin: 2rem auto;
     padding: 1rem;
     width: max-content;
+    width: calc(100% - 3rem);
 }

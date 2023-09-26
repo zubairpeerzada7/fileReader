@@ -1,10 +1,16 @@
 Doc read and search (.docx, pdf, xlsx)
 
-To setup:
-yarn install
+To setup project:
 
-To run
-yarn start
+1.  Clone project
+2.  Then in the project directory terminal, run
 
-To build
-yarn build
+         yarn install
+          or
+         npm install
+
+3.  To run the project, in terminal run
+
+         yarn start
+          or
+         npm run start
